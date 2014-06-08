@@ -13,5 +13,17 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0"
+  },
+  "description": "the-matrix ==========",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uscacm/the-matrix.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/uscacm/the-matrix/issues"
   }
 }
