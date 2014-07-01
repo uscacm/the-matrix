@@ -5,6 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// MongoDB stuff
+var MongoClient = require('mongodb').MongoClient;
+var MongoServer = require('mongodb').Server;
+var config = require('./config');
+var UserDriver = require('./db/user_driver.js').UserDriver;
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -20,6 +26,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var db;
+var user_driver;
+var mongoClient = new MongoClient(new MongoServer(config.host, config.port));
+mongoClient.open(function(err, mongoClient) {
+  if (!mongoClient) {
+    console.error('Error (Exiting): Must start MongoDB first.');
+    process.exit(1);
+  }
+  db = mongoClient.db(config.db_name);
+  user_driver = new UserDriver(db);
+});
+
+// Make db accessible to router.
+app.use(function(req, res, next) {
+  req.db = db;
+  req.user_driver = user_driver;
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
