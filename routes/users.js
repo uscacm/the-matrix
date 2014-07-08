@@ -34,7 +34,7 @@ router.post('/add', function(req, res) {
   var first_name = req.body.first_name;
   var last_name = req.body.last_name;
   var grad_year = req.body.grad_year;
-  var grad_student = req.body.grad_student;
+  var grad_student = req.body.grad_student;  // TODO: align with frontend.
   var email = req.body.email;
   var major = req.body.major;
 
@@ -54,6 +54,18 @@ router.post('/add', function(req, res) {
     } else {
       res.location('list_users');
       res.redirect('list_users');
+    }
+  });
+});
+
+router.get('/:usc_id(\\d+)', function(req, res) {
+  var user_driver = req.user_driver;
+
+  user_driver.findByUSCID(req.params.usc_id, function(err, user) {
+    if (err) {
+      res.send("ERROR");
+    } else {
+      res.render('test_user', {user_object: user});
     }
   });
 });
