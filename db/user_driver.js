@@ -29,10 +29,22 @@ UserDriver.prototype.findByUSCID = function(usc_id, callback) {
     if (err) callback(err);
     else {
       user_collection.find({'usc_id': usc_id}).toArray(function(err, user) {
-        console.log('output:');
-        console.log(user);
         if (err) callback(err);
         else if (user.length > 1) callback({error: 'more than one user'});
+        else if (user.length === 0) callback({error: 'no user found'});
+        else callback(null, user);
+      });
+    }
+  });
+};
+
+UserDriver.prototype.findByUserHash = function(hash, callback) {
+  this.getCollection(function(err, user_collection) {
+    if (err) callback(err);
+    else {
+      user_collection.find({'hash': hash}).toArray(function(err, user) {
+        if (err) callback(err);
+        else if (user.length > 1) callback({error: 'more than one user.'});
         else if (user.length === 0) callback({error: 'no user found'});
         else callback(null, user);
       });

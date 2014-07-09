@@ -70,4 +70,16 @@ router.get('/:usc_id(\\d+)', function(req, res) {
   });
 });
 
+router.get('/:hash([0-9a-fA-F]{40})', function(req, res) {
+  var user_driver = req.user_driver;
+
+  user_driver.findByUserHash(req.params.hash, function(err, user) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('test_user', {user_object: user});
+    }
+  });
+});
+
 module.exports = router;
