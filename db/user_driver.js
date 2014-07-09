@@ -1,3 +1,4 @@
+var crypto = require('crypto');
 var config = require('./../config');
 
 UserDriver = function(db) {
@@ -45,6 +46,9 @@ UserDriver.prototype.save = function(user, callback) {
     else {
       user.created_at = new Date();
       // TODO(jjw1707) Generation of hashed link
+      var hash = crypto.createHmac('sha1', config.user_salt)
+                       .update(user.usc_id).digest('hex');
+      user.hash = hash;
 
       user_collection.insert(user, function() {
         callback(null, user);

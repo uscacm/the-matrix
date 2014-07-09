@@ -50,7 +50,7 @@ router.post('/add', function(req, res) {
 
   user_driver.save(user, function(err, doc) {
     if (err) {
-      res.send("ERROR");
+      res.send(res);
     } else {
       res.location('list_users');
       res.redirect('list_users');
@@ -63,7 +63,7 @@ router.get('/:usc_id(\\d+)', function(req, res) {
 
   user_driver.findByUSCID(req.params.usc_id, function(err, user) {
     if (err) {
-      res.send("ERROR");
+      res.send(err);
     } else {
       res.render('test_user', {user_object: user});
     }
