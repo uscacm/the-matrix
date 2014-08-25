@@ -56,11 +56,12 @@ UserDriver.prototype.save = function(user, callback) {
   this.getCollection(function(err, user_collection) {
     if (err) callback(err);
     else {
-      user.created_at = new Date();
-      var hash = crypto.createHmac('sha1', config.user_salt)
-                       .update(user.usc_id).digest('hex');
-      user.hash = hash;
-
+      if (!user.hash) {
+        user.created_at = new Date();
+        var hash = crypto.createHmac('sha1', config.user_salt)
+                         .update(user.usc_id).digest('hex');
+        user.hash = hash;
+      }
       user_collection.insert(user, function() {
         callback(null, user);
       });
@@ -75,7 +76,10 @@ UserDriver.prototype.update = function(user, callback) {
       user.updated_at = new Date();
       user_collection.find({'usc_id': user.usc_id}).toArray(function(err, doc) {
         user._id = doc[0]._id;
-        user_collection.
+        user_collection.save(user, function(error, doc) {
+          if (error) callback(error);
+          else callback(null, doc);
+        });
       });
     }
   });

@@ -58,6 +58,42 @@ router.post('/add', function(req, res) {
   });
 });
 
+router.get('/update/:usc_id(\\d+)', function (req, res) {
+  res.render('test_update_user');
+});
+
+router.post('/update', function(req, res) {
+  var user_driver = req.user_driver;
+
+  // Get user information
+  var usc_id = req.body.usc_id;
+  var first_name = req.body.first_name;
+  var last_name = req.body.last_name;
+  var grad_year = req.body.grad_year;
+  var grad_student = req.body.grad_student;  // TODO: align with frontend.
+  var email = req.body.email;
+  var major = req.body.major;
+
+  var user = {
+    "usc_id": usc_id,
+    "first_name": first_name,
+    "last_name": last_name,
+    "graduation_year": grad_year,
+    "grad_student": grad_student,
+    "email": email,
+    "major": major
+  };
+
+  user_driver.update(user, function(err, doc) {
+    if (err) {
+      res.send(res);
+    } else {
+      res.location('list_users');
+      res.redirect('list_users');
+    }
+  });
+});
+
 router.get('/:usc_id(\\d+)', function(req, res) {
   var user_driver = req.user_driver;
 
