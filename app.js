@@ -10,9 +10,11 @@ var MongoClient = require('mongodb').MongoClient;
 var MongoServer = require('mongodb').Server;
 var config = require('./config');
 var UserDriver = require('./db/user_driver.js').UserDriver;
+var EventDriver = require('./db/event_driver.js').EventDriver;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var events = require('./routes/events');
 
 var app = express();
 
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var db;
 var user_driver;
+var event_driver;
 var mongoClient = new MongoClient(new MongoServer(config.host, config.port));
 mongoClient.open(function(err, mongoClient) {
   if (!mongoClient) {
@@ -37,17 +40,20 @@ mongoClient.open(function(err, mongoClient) {
   }
   db = mongoClient.db(config.db_name);
   user_driver = new UserDriver(db);
+  event_driver = new EventDriver(db);
 });
 
 // Make db accessible to router.
 app.use(function(req, res, next) {
   req.db = db;
   req.user_driver = user_driver;
+  req.event_driver = event_driver;
   next();
 });
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/events', events);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
