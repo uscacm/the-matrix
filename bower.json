@@ -1,0 +1,22 @@
+{
+  "name": "the-matrix",
+  "version": "0.0.0",
+  "homepage": "https://github.com/uscacm/the-matrix",
+  "authors": [
+    "Ruyan <fading.jade@gmail.com>"
+  ],
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.stellar": "~0.6.2",
+    "jquery-waypoints": "~2.0.5",
+    "jquery": "~2.1.1"
+  }
+}
