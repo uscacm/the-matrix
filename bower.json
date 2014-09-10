@@ -15,6 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery.stellar": "~0.6.2"
+    "jquery.stellar": "~0.6.2",
+    "jquery-waypoints": "~2.0.5",
+    "jquery": "~2.1.1"
   }
 }
