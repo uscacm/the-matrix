@@ -1,6 +1,7 @@
 // SPACE toggles manual entry
 // SHIFT+SPACE toggles auto entry
 $(document).ready(function() {
+  $('form').find("input[type=text]").val(""); 
   $(document).keydown(function (e) {
     if (e.keyCode == 32) {
      $(".manual-input").toggle();
@@ -11,7 +12,7 @@ $(document).ready(function() {
 $("#checkin").submit(function(e) {
     $.ajax({
             type: "POST",
-            url: "/checkin2",
+            url: "/checkin/action",
             data: $("#checkin").serialize(), // serializes the form's elements.
             success: function(data) { 
               $('<div class="alert alert-success" role="alert"></div>')
