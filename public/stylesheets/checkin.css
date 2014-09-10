@@ -1,7 +1,24 @@
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
+#top {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  display:table;
+  vertical-align: middle;
+  z-index: 5;
+}
+
+#top .btn{
+  background: rgba(0, 0, 0, .5);
+  border: 1px #900 solid;
+  color: #900;
+}
+
+#float {
+  width: 100%;
+  height: 100%;
+  display:table-cell;
+  vertical-align: middle;
 }
 
 .form-signin {
@@ -34,6 +51,8 @@ body {
   z-index: 2;
 }
 .form-signin input{
+  background: rgba(0, 0, 0, .5);
+  color: rgba(255, 255, 255, .75) !important;
   margin-bottom: 10px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -41,4 +60,30 @@ body {
 
 .manual-input {
   display: none;
+}
+
+/** Manually Override Bootstrap, sue me :P */
+
+textarea:focus, input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(255, 204, 0, 0.8);
+  /* We don't have the LESS .box-shadow function in plain CSS */
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 204, 0, 0.6));
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 204, 0, 0.6));
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 204, 0, 0.6));
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
 }
