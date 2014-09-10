@@ -1,6 +1,10 @@
+body {
+  overflow: none;
+}
+
 #alert-container {
   position: absolute;
-  top: 0;
+  top: 10%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -80,6 +84,12 @@
 
 .manual-input {
   display: none;
+}
+
+.auto-input {
+  position: relative;
+  top: -100000px;
+  left: 0;
 }
 
 /** Manually Override Bootstrap, sue me :P */

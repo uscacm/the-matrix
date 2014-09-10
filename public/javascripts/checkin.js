@@ -1,9 +1,9 @@
-
+// SPACE toggles manual entry
+// SHIFT+SPACE toggles auto entry
 $(document).ready(function() {
   $(document).keydown(function (e) {
     if (e.keyCode == 32) {
      $(".manual-input").toggle();
-     $(".auto-input").toggle();
     }
   })
 });
