@@ -30,9 +30,19 @@ UserDriver.prototype.findByUSCID = function(usc_id, callback) {
     else {
       user_collection.find({'usc_id': usc_id}).toArray(function(err, user) {
         if (err) callback(err);
-        else if (user.length > 1) callback({error: 'more than one user'});
-        else if (user.length === 0) callback({error: 'no user found'});
-        else callback(null, user);
+        else if (user.length > 1) {
+          callback({
+            error: 'More than one user', 
+            errorcode: 1 
+          });
+        } else if (user.length === 0) {
+          callback({
+            error: 'No user found',
+            errorcode: 2
+          });
+        } else {
+          callback(null, user);
+        }
       });
     }
   });

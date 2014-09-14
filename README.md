@@ -25,3 +25,10 @@ Automated newsletter management including opt-out on signup (and later).
 ### So what do you pick?
 
 [Blue Pill](http://uscacm.org/) or [Red Pill](https://github.com/uscacm/the-matrix)
+
+### Error codes
+
+1: More than one user
+2: No user found
+3: More than one event
+4: No event found
