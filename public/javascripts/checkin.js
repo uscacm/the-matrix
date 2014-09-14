@@ -17,7 +17,7 @@ $("#checkin").submit(function(e) {
             success: function(data) { 
               $('<div class="alert alert-success" role="alert"></div>')
                 .insertAfter($("#alert-container div:last-child"))
-                .text("Success! " + data.id)
+                .text("Welcome " + data.fname + " :)")
                 .fadeOut(2000);
             },
             error: function(err) {
