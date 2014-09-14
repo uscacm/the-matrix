@@ -65,6 +65,10 @@ EventDriver.prototype.addUserToEvent = function(obj, callback) {
     else {
       event_collection.find({event_id: obj.event_id}).toArray(function(err, event) {
         event.users.push(obj.usc_id);
+        event_collection.save(event, function(error, doc) {
+          if (error) callback(error);
+          else callback(null, doc);
+        });
       });
     }
   });
