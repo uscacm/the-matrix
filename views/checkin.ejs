@@ -5,42 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ACM Matrix</title>
-
-    <!-- Latest compiled and minified bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-    <link href="../stylesheets/checkin.css" rel="stylesheet">
-
+    <!-- main page style -->
+    <link rel="stylesheet" href="stylesheets/matrix.css"/>
+    <link rel="stylesheet" href="stylesheets/checkin.css"/>
   </head>
   <body>
-    <div class="container">
 
-      <form class="form-signin" role="form" action="" id="checkin">
-        <h2 class="form-signin-heading">Check In</h2>
-        <!-- TODO(ruyan): When events are set up, autopopulate the event id. -->
-        <input name="event-id" type="text" class="form-control manual-input" placeholder="Event ID">
-        <input name="card-scan" type="text" class="form-control" placeholder="Card Scan" autofocus>
-        <input name="usc-id" type="text" class="form-control manual-input" placeholder="USC ID">
-        <button class="btn btn-lg btn-primary btn-block manual-input" type="submit">Sign in</button>
-      </form>
+    <canvas id="bottom">
+    </canvas> <!-- #bottom -->
+    <div id="alert-container">
+      <div></div>
+    </div>
+    <div class="container text-center" id="top">
+      <div id="float">
 
-    <script type="text/javascript">
-      $("#checkin").submit(function(e) {
-          $.ajax({
-                 type: "POST",
-                 url: "/checkin2",
-                 data: $("#checkin").serialize(), // serializes the form's elements.
-                 success: function(data)
-                 {
-                     alert(data); // show response from the php script.
-                 }
-               });
-          $("#checkin").clear();
-          e.preventDefault();
-          return false; // avoid to execute the actual submit of the form.
-      }); 
-    </script>
-    </div> <!-- /container -->
+        <form class="form-signin" role="form" action="" id="checkin">
+          <!-- <h2 class="form-signin-heading">Check In</h2> -->
+          <!-- TODO(ruyan): When events are set up, autopopulate the event id. -->
+          <input name="card-scan" type="text" class="form-control auto-input" placeholder="Card Scan" autofocus>
+          <input name="event-id" type="text" class="form-control manual-input" placeholder="Event ID">
+          <input name="usc-id" type="text" class="form-control manual-input" placeholder="USC ID">
+          <button class="btn btn-lg btn-block manual-input" type="submit">Sign in</button>
+        </form>
+      </div> <!-- #float -->
+    </div> <!-- #top.container -->
+    <script type="text/javascript" src="javascripts/checkin.js"></script>
+    <script type="text/javascript" src="javascripts/matrix.js"></script>
   </body>
 </html>
