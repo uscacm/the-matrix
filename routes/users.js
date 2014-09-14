@@ -34,7 +34,7 @@ router.post('/add', function(req, res) {
   var first_name = req.body.first_name;
   var last_name = req.body.last_name;
   var grad_year = req.body.grad_year;
-  var grad_student = req.body.grad_student;  // TODO: align with frontend.
+  var grad_student = req.body.grad_student;  // TODO(Janice): align with frontend.
   var email = req.body.email;
   var major = req.body.major;
 
@@ -94,7 +94,7 @@ router.post('/update', function(req, res) {
   });
 });
 
-router.get('/:usc_id(\\d+)', function(req, res) {
+router.get('/:usc_id(\\d{10})', function(req, res) {
   var user_driver = req.user_driver;
 
   user_driver.findByUSCID(req.params.usc_id, function(err, user) {
