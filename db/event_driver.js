@@ -49,7 +49,23 @@ EventDriver.prototype.save = function(event, callback) {
   this.getCollection(function(err, event_collection) {
     if (err) callback(err);
     else {
+      event.created_at = new Date();
+      event.users = [];
+      event_collection.insert(event, function() {
+        callback(null, event);
+      });
+    }
+  });
+};
 
+// obj = {usc_id: #10_digits#, event_id: #6_digits#}
+EventDriver.prototype.addUserToEvent = function(obj, callback) {
+  this.getCollection(function(err, event_collection) {
+    if (err) callback(err);
+    else {
+      event_collection.find({event_id: obj.event_id}).toArray(function(err, event) {
+        event.users.push(obj.usc_id);
+      });
     }
   });
 };
