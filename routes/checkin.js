@@ -23,12 +23,11 @@ router.post('/action', function(req, res) {
     } else {
       var err;
       user_driver.findByUSCID(match[1], function(err, users) {
-        console.log(users);
         if (err === null) {
-          res.send({'id': users[0]['usc_id'], 'fname': users[0]['first_name']});
+          res.send({'id': users[0]['usc_id'], 'fname': users[0]['first_name'], 'error': 0});
         } else {
           //TODO(ruyan): error cases
-          res.send({'id': 00000000000});
+          res.send({'error': err.errorcode});
         }
       });
     }

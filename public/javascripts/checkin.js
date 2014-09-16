@@ -15,10 +15,21 @@ $("#checkin").submit(function(e) {
             url: "/checkin/action",
             data: $("#checkin").serialize(), // serializes the form's elements.
             success: function(data) { 
-              $('<div class="alert alert-success" role="alert"></div>')
-                .insertAfter($("#alert-container div:last-child"))
-                .text("Welcome " + data.fname + " :)")
-                .fadeOut(2000);
+              // TODO(ruyan): make this less gross if possible
+              switch (data.error) {
+                case 0:
+                  $('<div class="alert alert-success" role="alert"></div>')
+                    .insertAfter($("#alert-container div:last-child"))
+                    .text("Welcome " + data.fname + " :)")
+                    .fadeOut(2000);
+                  break;
+                case 2:
+                  $('<div class="alert alert-danger" role="alert"></div>')
+                    .insertAfter($("#alert-container div:last-child"))
+                    .text("Error: User does not exist.")
+                    .fadeOut(2000);
+                  break;
+              }
             },
             error: function(err) {
               $('<div class="alert alert-danger" role="alert"></div>')
